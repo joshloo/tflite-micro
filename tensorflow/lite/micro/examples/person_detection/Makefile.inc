@@ -83,3 +83,4 @@ list_person_detection_example_sources:
 
 list_person_detection_example_headers:
 	@echo $(person_detection_HDRS)
+

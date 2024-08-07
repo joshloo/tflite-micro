@@ -45,12 +45,16 @@ const tflite::Model* model = nullptr;
 tflite::MicroInterpreter* interpreter = nullptr;
 TfLiteTensor* input = nullptr;
 
+constexpr int tensor_arena_size = 400 * 1024;
+/*
 // An area of memory to use for input, output, and intermediate arrays.
 #if defined(XTENSA) && defined(VISION_P6)
 constexpr int tensor_arena_size = 352 * 1024;
 #else
 constexpr int tensor_arena_size = 136 * 1024;
 #endif  // defined(XTENSA) && defined(VISION_P6)
+*/
+
 //constexpr int tensor_arena_size = 93 * 1024;
 alignas(16) static uint8_t tensor_arena[tensor_arena_size] = {0};
 }  // namespace
@@ -92,21 +96,27 @@ TF_LITE_MICRO_TEST(TestInvoke) {
   // An easier approach is to just use the AllOpsResolver, but this will
   // incur some penalty in code space for op implementations that are not
   // needed by this graph.
-  tflite::MicroMutableOpResolver<8> micro_op_resolver;
+  tflite::MicroMutableOpResolver<14> micro_op_resolver;
 
-  //micro_op_resolver.AddConv2D();
+  // 10 operations needed
   micro_op_resolver.AddMaxPool2D();
   micro_op_resolver.AddQuantize();
   micro_op_resolver.AddReshape();
   micro_op_resolver.AddFullyConnected();
+  micro_op_resolver.AddMinimum();
+  micro_op_resolver.AddRelu();
+  micro_op_resolver.AddMul();
+  micro_op_resolver.AddRound();
+  micro_op_resolver.AddSub();
+  micro_op_resolver.AddAdd();
 
   // Keeping below to make compilation happy
   micro_op_resolver.AddAveragePool2D(tflite::Register_AVERAGE_POOL_2D_INT8());
   micro_op_resolver.AddConv2D(tflite::Register_CONV_2D_INT8());
   micro_op_resolver.AddDepthwiseConv2D(
       tflite::Register_DEPTHWISE_CONV_2D_INT8());
-  //micro_op_resolver.AddReshape();
   micro_op_resolver.AddSoftmax(tflite::Register_SOFTMAX_INT8());
+  //micro_op_resolver.AddReshape();
 
   // Step 4: Add interpreter
   // Build an interpreter to run the model with.

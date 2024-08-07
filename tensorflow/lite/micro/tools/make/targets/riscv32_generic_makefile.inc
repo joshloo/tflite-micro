@@ -1,15 +1,15 @@
 # Settings for RISCV 32-bit toolchain.
 TARGET_ARCH := riscv32
-TARGET_TOOLCHAIN_PREFIX := riscv64-unknown-elf-
+TARGET_TOOLCHAIN_PREFIX := riscv-none-embed-
 
 RISCV_ARCH := rv32imc
 RISCV_ABI := ilp32
-RISCV_CODE_MODEL := medany
+#RISCV_CODE_MODEL := medany
 
 # Allow additional flags on the command line for debugging.
 RISCV_EXTRA_CFLAGS :=
 
-TARGET_DEFAULT_TOOLCHAIN_ROOT := $(DOWNLOADS_DIR)/riscv_toolchain/bin/
+TARGET_DEFAULT_TOOLCHAIN_ROOT := /home/anonymous/lscc/propel/2024.1/sdk/riscv-none-embed-gcc/bin/
 TARGET_TOOLCHAIN_ROOT := $(TARGET_DEFAULT_TOOLCHAIN_ROOT)
 ifeq ($(TARGET_TOOLCHAIN_ROOT), $(TARGET_DEFAULT_TOOLCHAIN_ROOT))
   $(eval $(call add_third_party_download,$(RISCV_TOOLCHAIN_URL),$(RISCV_TOOLCHAIN_MD5),riscv_toolchain,))
@@ -20,26 +20,29 @@ export PATH := $(TARGET_TOOLCHAIN_ROOT):$(PATH)
 PLATFORM_FLAGS = \
   -march=$(RISCV_ARCH) \
   -mabi=$(RISCV_ABI) \
-  -mcmodel=$(RISCV_CODE_MODEL) \
-  -mexplicit-relocs \
   -fno-builtin-printf \
   -DTF_LITE_MCU_DEBUG_LOG \
   -DTF_LITE_USE_GLOBAL_CMATH_FUNCTIONS \
-  -funsigned-char \
+  -fsigned-char \
   -fno-delete-null-pointer-checks \
   -fomit-frame-pointer
+
+#  -mcmodel=$(RISCV_CODE_MODEL) \
+#  -mexplicit-relocs \
+#  -funsigned-char \
 
 CXXFLAGS += $(PLATFORM_FLAGS) \
   -fpermissive \
   -fno-use-cxa-atexit \
   -DTF_LITE_USE_GLOBAL_MIN \
-  -DTF_LITE_USE_GLOBAL_MAX
+  -DTF_LITE_USE_GLOBAL_MAX \
+  -DPICOLIBC_INTEGER_PRINTF_SCANF -DNDEBUG -DLSCC_STDIO_UART_APB
 
 CCFLAGS += $(PLATFORM_FLAGS)
 
 BUILD_TYPE := micro
 
-LDFLAGS += --specs=nano.specs
+LDFLAGS += --specs=nosys.specs
 
 # See http://b/158651472 for why memory arena threshold test is disabled.
 EXCLUDED_TESTS := \

@@ -207,7 +207,7 @@ ifeq ($(TOOLCHAIN), gcc)
 endif
 
 # override these in the makefile.inc for specific compiler targets
-TARGET_TOOLCHAIN_PREFIX :=
+TARGET_TOOLCHAIN_PREFIX := riscv-none-embed-
 TARGET_TOOLCHAIN_ROOT :=
 
 # Specifying BUILD_TYPE=<blah> as part of the make command gives us a few

@@ -1,0 +1,13 @@
+--- depthwise_conv_common.cc
++++ depthwise_conv_common.cc
+@@ -22,8 +22,8 @@
+ #include "tensorflow/lite/kernels/internal/tensor_ctypes.h"
+ #include "tensorflow/lite/kernels/kernel_util.h"
+ #include "tensorflow/lite/kernels/padding.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/depthwise_conv.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/kernel_util.h"
++#include "tensorflow/lite/micro/kernels/depthwise_conv.h"
++#include "tensorflow/lite/micro/kernels/kernel_util.h"
+ 
+ namespace tflite {
+ 

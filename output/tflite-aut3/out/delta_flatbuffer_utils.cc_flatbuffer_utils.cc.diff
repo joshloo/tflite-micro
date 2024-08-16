@@ -1,0 +1,11 @@
+--- flatbuffer_utils.cc
++++ flatbuffer_utils.cc
+@@ -13,7 +13,7 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/flatbuffer_utils.h"
++#include "tensorflow/lite/micro/flatbuffer_utils.h"
+ 
+ namespace tflite {
+ 

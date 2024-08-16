@@ -1,0 +1,20 @@
+--- simple_memory_allocator.cc
++++ simple_memory_allocator.cc
+@@ -13,7 +13,7 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/simple_memory_allocator.h"
++#include "tensorflow/lite/micro/simple_memory_allocator.h"
+ 
+ #include <cstddef>
+ #include <cstdint>
+@@ -22,7 +22,7 @@
+ #include "tensorflow/lite/c/common.h"
+ #include "tensorflow/lite/core/api/error_reporter.h"
+ #include "tensorflow/lite/kernels/internal/compatibility.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/memory_helpers.h"
++#include "tensorflow/lite/micro/memory_helpers.h"
+ 
+ namespace tflite {
+ 

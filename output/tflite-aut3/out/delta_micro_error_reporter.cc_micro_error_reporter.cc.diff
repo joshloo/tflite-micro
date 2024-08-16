@@ -1,0 +1,21 @@
+--- micro_error_reporter.cc
++++ micro_error_reporter.cc
+@@ -13,15 +13,15 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_error_reporter.h"
++#include "tensorflow/lite/micro/micro_error_reporter.h"
+ 
+ #include <cstdarg>
+ #include <cstdint>
+ #include <new>
+ 
+ #if !defined(TF_LITE_STRIP_ERROR_STRINGS)
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/debug_log.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_string.h"
++#include "tensorflow/lite/micro/debug_log.h"
++#include "tensorflow/lite/micro/micro_string.h"
+ #endif
+ 
+ namespace {

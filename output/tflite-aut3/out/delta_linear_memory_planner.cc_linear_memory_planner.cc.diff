@@ -1,0 +1,11 @@
+--- linear_memory_planner.cc
++++ linear_memory_planner.cc
+@@ -13,7 +13,7 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/memory_planner/linear_memory_planner.h"
++#include "tensorflow/lite/micro/memory_planner/linear_memory_planner.h"
+ 
+ namespace tflite {
+ 

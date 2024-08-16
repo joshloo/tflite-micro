@@ -1,0 +1,66 @@
+--- add.cc
++++ add.cc
+@@ -15,16 +15,16 @@
+ 
+ #include "tensorflow/lite/kernels/internal/reference/add.h"
+ 
++#include "CMSIS/NN/Include/arm_nnfunctions.h"
+ #include "tensorflow/lite/c/builtin_op_data.h"
+-#include "tensorflow/lite/c/common.h"
+ #include "tensorflow/lite/kernels/internal/quantization_util.h"
+ #include "tensorflow/lite/kernels/internal/reference/integer_ops/add.h"
+ #include "tensorflow/lite/kernels/internal/reference/process_broadcast_shapes.h"
+ #include "tensorflow/lite/kernels/internal/tensor_ctypes.h"
+ #include "tensorflow/lite/kernels/kernel_util.h"
+ #include "tensorflow/lite/kernels/op_macros.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/kernel_util.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/memory_helpers.h"
++#include "tensorflow/lite/micro/kernels/kernel_util.h"
++#include "tensorflow/lite/micro/memory_helpers.h"
+ 
+ namespace tflite {
+ namespace ops {
+@@ -161,13 +161,19 @@
+             tflite::micro::GetTensorShape(output),
+             tflite::micro::GetTensorData<int8_t>(output));
+       } else {
+-        reference_integer_ops::Add(
+-            op_params, tflite::micro::GetTensorShape(input1),
++        arm_elementwise_add_s8(
+             tflite::micro::GetTensorData<int8_t>(input1),
+-            tflite::micro::GetTensorShape(input2),
+             tflite::micro::GetTensorData<int8_t>(input2),
+-            tflite::micro::GetTensorShape(output),
+-            tflite::micro::GetTensorData<int8_t>(output));
++            op_params.input1_offset, op_params.input1_multiplier,
++            op_params.input1_shift, op_params.input2_offset,
++            op_params.input2_multiplier, op_params.input2_shift,
++            op_params.left_shift, tflite::micro::GetTensorData<int8_t>(output),
++            op_params.output_offset, op_params.output_multiplier,
++            op_params.output_shift, op_params.quantized_activation_min,
++            op_params.quantized_activation_max,
++            MatchingElementsSize(tflite::micro::GetTensorShape(input1),
++                                 tflite::micro::GetTensorShape(input2),
++                                 tflite::micro::GetTensorShape(output)));
+       }
+       break;
+     }
+@@ -228,15 +234,15 @@
+ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
+   auto* params = reinterpret_cast<TfLiteAddParams*>(node->builtin_data);
+ 
+-  TFLITE_DCHECK(node->user_data != nullptr);
+-  const OpData* data = static_cast<const OpData*>(node->user_data);
+-
+   const TfLiteEvalTensor* input1 =
+       tflite::micro::GetEvalInput(context, node, kInputTensor1);
+   const TfLiteEvalTensor* input2 =
+       tflite::micro::GetEvalInput(context, node, kInputTensor2);
+   TfLiteEvalTensor* output =
+       tflite::micro::GetEvalOutput(context, node, kOutputTensor);
++
++  TFLITE_DCHECK(node->user_data != nullptr);
++  const OpData* data = static_cast<const OpData*>(node->user_data);
+ 
+   if (output->type == kTfLiteFloat32) {
+     EvalAdd(context, node, params, data, input1, input2, output);

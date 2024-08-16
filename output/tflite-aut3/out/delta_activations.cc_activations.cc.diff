@@ -1,0 +1,22 @@
+--- activations.cc
++++ activations.cc
+@@ -13,7 +13,7 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/activations.h"
++#include "tensorflow/lite/micro/kernels/activations.h"
+ 
+ #include "tensorflow/lite/c/builtin_op_data.h"
+ #include "tensorflow/lite/c/common.h"
+@@ -23,8 +23,8 @@
+ #include "tensorflow/lite/kernels/internal/types.h"
+ #include "tensorflow/lite/kernels/kernel_util.h"
+ #include "tensorflow/lite/kernels/op_macros.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/kernel_util.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_utils.h"
++#include "tensorflow/lite/micro/kernels/kernel_util.h"
++#include "tensorflow/lite/micro/micro_utils.h"
+ 
+ namespace tflite {
+ namespace {

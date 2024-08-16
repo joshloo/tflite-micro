@@ -1,0 +1,11 @@
+--- micro_string.cc
++++ micro_string.cc
+@@ -19,7 +19,7 @@
+ // of DebugLog() and then get the numerical variations without requiring any
+ // more code.
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_string.h"
++#include "tensorflow/lite/micro/micro_string.h"
+ 
+ #include <cstdarg>
+ #include <cstdint>

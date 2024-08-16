@@ -1,0 +1,30 @@
+--- micro_interpreter.cc
++++ micro_interpreter.cc
+@@ -12,7 +12,7 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ ==============================================================================*/
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_interpreter.h"
++#include "tensorflow/lite/micro/micro_interpreter.h"
+ 
+ #include <cstdarg>
+ #include <cstddef>
+@@ -22,12 +22,12 @@
+ #include "tensorflow/lite/c/common.h"
+ #include "tensorflow/lite/core/api/error_reporter.h"
+ #include "tensorflow/lite/core/api/tensor_utils.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/flatbuffer_utils.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/memory_helpers.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_allocator.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_error_reporter.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_op_resolver.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_profiler.h"
++#include "tensorflow/lite/micro/flatbuffer_utils.h"
++#include "tensorflow/lite/micro/memory_helpers.h"
++#include "tensorflow/lite/micro/micro_allocator.h"
++#include "tensorflow/lite/micro/micro_error_reporter.h"
++#include "tensorflow/lite/micro/micro_op_resolver.h"
++#include "tensorflow/lite/micro/micro_profiler.h"
+ #include "tensorflow/lite/schema/schema_generated.h"
+ #include "tensorflow/lite/schema/schema_utils.h"
+ 

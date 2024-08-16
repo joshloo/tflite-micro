@@ -1,0 +1,13 @@
+--- circular_buffer.cc
++++ circular_buffer.cc
+@@ -20,8 +20,8 @@
+ #include "tensorflow/lite/kernels/internal/tensor_ctypes.h"
+ #include "tensorflow/lite/kernels/kernel_util.h"
+ #include "tensorflow/lite/kernels/op_macros.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/flatbuffer_utils.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/kernel_util.h"
++#include "tensorflow/lite/micro/flatbuffer_utils.h"
++#include "tensorflow/lite/micro/kernels/kernel_util.h"
+ 
+ /*
+  * The circular buffer custom operator is used to implement strided streaming

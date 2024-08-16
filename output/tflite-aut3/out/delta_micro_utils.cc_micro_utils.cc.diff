@@ -1,0 +1,20 @@
+--- micro_utils.cc
++++ micro_utils.cc
+@@ -13,7 +13,7 @@
+ limitations under the License.
+ ==============================================================================*/
+ 
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_utils.h"
++#include "tensorflow/lite/micro/micro_utils.h"
+ 
+ #include <cmath>
+ #include <cstdint>
+@@ -21,7 +21,7 @@
+ 
+ #include "tensorflow/lite/c/common.h"
+ #include "tensorflow/lite/kernels/op_macros.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/micro_error_reporter.h"
++#include "tensorflow/lite/micro/micro_error_reporter.h"
+ 
+ namespace tflite {
+ 

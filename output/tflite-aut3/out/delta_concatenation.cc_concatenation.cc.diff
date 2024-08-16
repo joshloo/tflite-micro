@@ -1,0 +1,11 @@
+--- concatenation.cc
++++ concatenation.cc
+@@ -22,7 +22,7 @@
+ #include "tensorflow/lite/kernels/internal/tensor_ctypes.h"
+ #include "tensorflow/lite/kernels/internal/types.h"
+ #include "tensorflow/lite/kernels/kernel_util.h"
+-#include "tensorflow/lite/micro/tflite-micro/tensorflow/lite/micro/kernels/kernel_util.h"
++#include "tensorflow/lite/micro/kernels/kernel_util.h"
+ 
+ namespace tflite {
+ namespace ops {
